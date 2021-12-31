@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/activity_main_fab_novo_cliente"
+        android:id="@+id/activity_lista_cliente_fab_novo_cliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -16,7 +16,7 @@
         android:focusable="true" />
 
     <ListView
-        android:id="@+id/activity_main_lista_de_clientes"
+        android:id="@+id/activity_lista_de_clientes_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
