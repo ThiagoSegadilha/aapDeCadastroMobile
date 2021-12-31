@@ -10,27 +10,47 @@ import android.widget.ListView
 import com.example.clientesloja.R
 import com.example.clientesloja.dao.ClienteDao
 
-class ListaClientesActivity: AppCompatActivity() {
+class ListaClientesActivity : AppCompatActivity() {
+
+    val TITULO_APPBAR = "Lista de clientes"
+    private val clienteDao = ClienteDao()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_lista_clientes)
-        setTitle("Lista de clientes")
 
-        val botaoCriarNovoCliente = findViewById<FloatingActionButton>(R.id.activity_lista_cliente_fab_novo_cliente)
-        botaoCriarNovoCliente.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this, FormularioClienteActivity::class.java))
-        })
+        setTitle(TITULO_APPBAR)
+
+        configuracaoFabNovoCliente()
     }
 
     override fun onResume() {
         super.onResume()
+        configuracaoLista(clienteDao)
+    }
 
-        val clienteDao = ClienteDao()
+    private fun configuracaoLista(clienteDao: ClienteDao) {
         val listaDeClientes = findViewById<ListView>(R.id.activity_lista_de_clientes_listview)
 
-        listaDeClientes.setAdapter(ArrayAdapter(this,
-            android.R.layout.simple_list_item_1, clienteDao.todosOsClientes()))
+        listaDeClientes.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1, clienteDao.todosOsClientes()
+            )
+        )
+    }
+
+    private fun configuracaoFabNovoCliente() {
+        val botaoCriarNovoCliente = findViewById<FloatingActionButton>(R.id.activity_lista_cliente_fab_novo_cliente)
+
+        botaoCriarNovoCliente.setOnClickListener {
+            abreFormularioClienteActivity()
+        }
+    }
+
+    private fun abreFormularioClienteActivity() {
+        startActivity(Intent(this, FormularioClienteActivity::class.java))
     }
 }
